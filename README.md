@@ -7,7 +7,7 @@ Built with pure HTML, CSS, and JavaScript. Hosted on GitHub Pages.
 ## Products
 
 - **[Svastha](https://svastha.co/)** — Ancient Wisdom for Modern Life. Hindu scripture study with AI-powered guidance.
-- **[Flow Into Stillness](https://flowintostillness.com/)** — Your Sanctuary for Inner Peace. Yoga platform with 150+ poses.
+- **[Flow Into Stillness](https://flowintostillness.com/)** — Your Sanctuary for Inner Peace. Yoga platform with 50+ poses (new poses added weekly).
 
 ## Structure
 
