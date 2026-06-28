@@ -18,9 +18,15 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
+  <link rel="preload"
     href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet" />
+    as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </noscript>
+  <link rel="preload" as="image" href="images/r_logo.webp" fetchpriority="high" type="image/webp" />
 
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="images/r_logo.png" />
@@ -32,7 +38,10 @@
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner container">
       <a href="index.html" class="nav-brand" aria-label="Rao Ventures Home">
-        <img src="images/r_logo.png" alt="Rao Ventures logo" class="nav-logo-img" />
+        <picture>
+          <source srcset="images/r_logo.webp" type="image/webp" />
+          <img src="images/r_logo.png" alt="Rao Ventures logo" class="nav-logo-img" width="38" height="38" />
+        </picture>
         <span class="nav-brand-name">Rao Ventures</span>
       </a>
       <ul class="nav-links" role="list">
@@ -85,9 +94,12 @@
           <div class="product-detail-visual reveal">
             <div class="product-screenshot-wrapper product-screenshot-svastha">
               <div class="product-screenshot-glow"></div>
-              <img src="images/svastha-screenshot.png"
-                alt="Svastha app — Scripture Library showing Upanishads including Isha, Kena, Katha, Prashna, Mundaka, Mandukya, and Taittiriya Upanishads with verse counts and Sanskrit titles"
-                class="product-screenshot" width="780" height="960" loading="lazy" />
+              <picture>
+                <source srcset="images/svastha-screenshot.webp" type="image/webp" />
+                <img src="images/svastha-screenshot.png"
+                  alt="Svastha app — Scripture Library showing Upanishads including Isha, Kena, Katha, Prashna, Mundaka, Mandukya, and Taittiriya Upanishads with verse counts and Sanskrit titles"
+                  class="product-screenshot" width="780" height="960" loading="lazy" />
+              </picture>
               <div class="product-visual-badge product-visual-badge-svastha">
                 <span>🌟</span> AI-Powered
               </div>
@@ -171,9 +183,12 @@
           <div class="product-detail-visual reveal">
             <div class="product-screenshot-wrapper product-screenshot-flow">
               <div class="product-screenshot-glow product-screenshot-glow-flow"></div>
-              <img src="images/flow-screenshot.png"
-                alt="Flow Into Stillness app — Bridge Pose detail page showing benefits, contraindications, breathing tips, muscles worked, instructions, modifications, and common mistakes"
-                class="product-screenshot" width="896" height="1008" loading="lazy" />
+              <picture>
+                <source srcset="images/flow-screenshot.webp" type="image/webp" />
+                <img src="images/flow-screenshot.png"
+                  alt="Flow Into Stillness app — Bridge Pose detail page showing benefits, contraindications, breathing tips, muscles worked, instructions, modifications, and common mistakes"
+                  class="product-screenshot" width="896" height="1008" loading="lazy" />
+              </picture>
               <div class="product-visual-badge product-visual-badge-flow">
                 <span>🧘</span> 50+ Poses
               </div>
@@ -259,7 +274,10 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="nav-brand" aria-label="Rao Ventures Home">
-          <img src="images/r_logo.png" alt="Rao Ventures logo" class="nav-logo-img" />
+          <picture>
+            <source srcset="images/r_logo.webp" type="image/webp" />
+            <img src="images/r_logo.png" alt="Rao Ventures logo" class="nav-logo-img" width="38" height="38" />
+          </picture>
           <span class="nav-brand-name">Rao Ventures</span>
         </a>
         <p class="footer-tagline">Empowering holistic wellness and personal growth.</p>
