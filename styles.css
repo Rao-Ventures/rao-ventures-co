@@ -19,6 +19,13 @@
   --teal-pale:    #F0FDFB;
   --teal-glow:    rgba(13,148,136,0.12);
 
+  /* Amber/Terracotta palette (from My Ashtanga Practice) */
+  --amber:        #D97706;
+  --amber-light:  #F59E0B;
+  --amber-dark:   #B45309;
+  --amber-pale:   #FEF3C7;
+  --amber-glow:   rgba(217,119,6,0.15);
+
   /* Warm neutrals */
   --cream:        #FDFBF7;
   --cream-dark:   #F5EFE2;
@@ -38,6 +45,7 @@
   /* Gradients */
   --grad-gold:    linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   --grad-teal:    linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+  --grad-amber:   linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
   --grad-warm:    linear-gradient(135deg, #B8860B 0%, #D4A843 50%, #0D9488 100%);
 
   /* Shadows */
@@ -46,6 +54,7 @@
   --shadow-lg:    0 8px 40px rgba(100,80,40,0.14), 0 4px 16px rgba(100,80,40,0.08);
   --shadow-gold:  0 4px 28px rgba(184,134,11,0.28);
   --shadow-teal:  0 4px 28px rgba(13,148,136,0.28);
+  --shadow-amber: 0 4px 28px rgba(217,119,6,0.28);
 
   /* Spacing */
   --radius-sm:    8px;
@@ -170,6 +179,30 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   background: var(--teal-dark);
   transform: translateY(-2px);
   box-shadow: 0 8px 36px rgba(13,148,136,0.4);
+}
+
+.btn-ashtanga {
+  background: var(--amber);
+  box-shadow: var(--shadow-amber);
+  color: #fff;
+}
+.btn-ashtanga:hover {
+  background: var(--amber-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px rgba(217,119,6,0.4);
+}
+
+.btn-disabled-soon {
+  background: var(--cream-mid);
+  color: var(--text-sec);
+  cursor: default;
+  box-shadow: none;
+  opacity: 0.9;
+  border: 1.5px solid var(--border-hover);
+}
+.btn-disabled-soon:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-ghost {
@@ -669,6 +702,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .product-card-glow-flow {
   background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(13,148,136,0.10) 0%, transparent 70%);
 }
+.product-card-glow-ashtanga {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(217,119,6,0.12) 0%, transparent 70%);
+}
 .product-card-inner {
   position: relative;
   z-index: 1;
@@ -695,6 +731,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .product-icon-svastha { background: var(--gold-pale); border: 1px solid rgba(184,134,11,0.25); }
 .product-icon-flow { background: var(--teal-pale); border: 1px solid rgba(13,148,136,0.2); }
+.product-icon-ashtanga { background: var(--amber-pale); border: 1px solid rgba(217,119,6,0.25); }
 .product-tag {
   font-family: var(--font-ui);
   font-size: 0.7rem;
@@ -706,6 +743,22 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .product-tag-tech { background: var(--gold-pale); color: var(--gold-dark); border: 1px solid rgba(184,134,11,0.2); }
 .product-tag-yoga { background: var(--teal-pale); color: var(--teal-dark); border: 1px solid rgba(13,148,136,0.2); }
+.product-tag-ashtanga { background: var(--amber-pale); color: var(--amber-dark); border: 1px solid rgba(217,119,6,0.25); }
+.product-tag-soon {
+  background: rgba(217,119,6,0.12);
+  color: var(--amber-dark);
+  border: 1px solid rgba(217,119,6,0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.product-tag-soon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
 .product-card-title {
   font-family: var(--font-sans);
   font-size: 1.65rem;
@@ -757,6 +810,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .product-card-link svg { width: 14px; height: 14px; }
 .product-card-link-flow { color: var(--teal); }
 .product-card-link-flow:hover { color: var(--teal-dark); }
+.product-card-link-ashtanga { color: var(--amber); }
+.product-card-link-ashtanga:hover { color: var(--amber-dark); }
+.product-card-link-soon {
+  color: var(--amber-dark);
+  cursor: pointer;
+  opacity: 0.95;
+}
+.product-card-link-soon:hover {
+  gap: 8px;
+  color: var(--amber);
+}
 
 /* ════════════════════════════════════════════════════════════════
    MISSION SECTION
@@ -1067,6 +1131,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .product-screenshot-glow-flow {
   background: radial-gradient(circle, rgba(13,148,136,0.22) 0%, transparent 70%);
 }
+.product-screenshot-glow-ashtanga {
+  background: radial-gradient(circle, rgba(217,119,6,0.22) 0%, transparent 70%);
+}
 .product-screenshot-flow .product-screenshot {
   box-shadow:
     var(--shadow-lg),
@@ -1076,6 +1143,23 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   box-shadow:
     0 24px 64px rgba(13,148,136,0.15),
     0 0 0 4px rgba(13,148,136,0.15);
+}
+.product-screenshot-ashtanga .product-screenshot {
+  box-shadow:
+    var(--shadow-lg),
+    0 0 0 4px rgba(217,119,6,0.08);
+}
+.product-screenshot-ashtanga:hover .product-screenshot {
+  box-shadow:
+    0 24px 64px rgba(217,119,6,0.15),
+    0 0 0 4px rgba(217,119,6,0.15);
+}
+
+.product-screenshot-ashtanga .product-visual-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 2;
 }
 
 @media (max-width: 768px) {
@@ -1181,6 +1265,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .product-visual-badge-svastha { color: var(--gold-dark); border-color: rgba(184,134,11,0.3); }
 .product-visual-badge-flow { color: var(--teal-dark); border-color: rgba(13,148,136,0.3); }
+.product-visual-badge-ashtanga { color: var(--amber-dark); border-color: rgba(217,119,6,0.3); }
+.product-visual-badge-soon {
+  background: var(--amber-pale);
+  color: var(--amber-dark);
+  border-color: rgba(217,119,6,0.35);
+  font-weight: 700;
+}
 
 /* Product detail content */
 .product-detail-title {
@@ -1228,6 +1319,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .pfi-icon-svastha { background: var(--gold-pale); border: 1px solid rgba(184,134,11,0.2); }
 .pfi-icon-flow { background: var(--teal-pale); border: 1px solid rgba(13,148,136,0.2); }
+.pfi-icon-ashtanga { background: var(--amber-pale); border: 1px solid rgba(217,119,6,0.25); }
 .pfi-content { display: flex; flex-direction: column; gap: 3px; }
 .pfi-title { font-family: var(--font-ui); font-size: 0.95rem; font-weight: 600; color: var(--text); }
 .pfi-text { font-family: var(--font-ui); font-size: 0.875rem; color: var(--text-sec); line-height: 1.55; }
