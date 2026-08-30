@@ -1029,7 +1029,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
    ════════════════════════════════════════════════════════════════ */
 .page-hero {
   position: relative;
-  padding: 160px 0 80px;
+  padding: 140px 0 24px;
   background: var(--cream);
   overflow: hidden;
 }
@@ -1070,7 +1070,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
    PRODUCTS DETAIL PAGE
    ════════════════════════════════════════════════════════════════ */
 .products-detail { background: var(--cream); }
-.product-detail { padding: 80px 0; }
+.products-detail.section-pad { padding-top: 20px; padding-bottom: 80px; }
+.product-detail { padding: 48px 0; }
+.product-detail:first-child { padding-top: 16px; }
 .product-detail:nth-child(odd) { background: var(--cream); }
 .product-detail-grid {
   display: grid;
