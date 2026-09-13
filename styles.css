@@ -311,6 +311,34 @@ button {
   letter-spacing: -0.01em;
 }
 
+.btn-playstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a2e;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all var(--dur) var(--ease);
+}
+
+.btn-playstore:hover {
+  background: #252542;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-playstore svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
 .product-tag-live {
   background: rgba(16, 185, 129, 0.12);
   color: #059669;
