@@ -258,6 +258,26 @@ button {
   box-shadow: 0 8px 36px rgba(217, 119, 6, 0.4);
 }
 
+.app-store-badge,
+.play-store-badge {
+  display: inline-flex;
+  align-items: center;
+  transition: transform var(--dur) var(--ease), filter var(--dur) var(--ease);
+}
+
+.app-store-badge:hover,
+.play-store-badge:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.app-store-badge img,
+.play-store-badge img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
 .btn-appstore {
   display: inline-flex;
   align-items: center;
