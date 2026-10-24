@@ -102,3 +102,22 @@ if (heroOrbs.length > 0) {
     });
   }, { passive: true });
 }
+
+// ── Vexo Analytics: Outbound & Product Link Click Tracking ─────────
+document.querySelectorAll('a[href^="http"]').forEach(link => {
+  link.addEventListener('click', () => {
+    try {
+      const url = new URL(link.href);
+      if (url.hostname !== window.location.hostname && window.vexo && typeof window.vexo.customEvent === 'function') {
+        window.vexo.customEvent('outbound_click', {
+          destination: url.hostname,
+          target_url: link.href,
+          text: (link.textContent || '').trim().slice(0, 50)
+        });
+      }
+    } catch (_) {
+      // Fail silently if analytics script is blocked or URL parsing fails
+    }
+  });
+});
+
