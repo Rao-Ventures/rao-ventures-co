@@ -2015,38 +2015,160 @@ button {
    CTA BANNER (Products Page)
    ════════════════════════════════════════════════════════════════ */
 .cta-banner {
-  padding: 80px 0;
+  position: relative;
+  padding: 96px 0;
   background: var(--surface-warm);
   border-top: 1px solid var(--border);
+  overflow: hidden;
 }
 
-.cta-inner {
-  text-align: center;
-  max-width: 640px;
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cta-orb-1 {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.12) 0%, transparent 70%);
+  top: -120px;
+  left: 5%;
+  filter: blur(60px);
+}
+
+.cta-orb-2 {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.11) 0%, transparent 70%);
+  bottom: -120px;
+  right: 5%;
+  filter: blur(60px);
+}
+
+.cta-card {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 56px 44px;
+  box-shadow: var(--shadow-lg);
+  max-width: 1080px;
   margin: 0 auto;
+  text-align: center;
+}
+
+.cta-header {
+  max-width: 680px;
+  margin: 0 auto 44px;
 }
 
 .cta-title {
   font-family: var(--font-sans);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 16px;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.cta-title em {
+  font-style: italic;
+  color: var(--gold);
 }
 
 .cta-text {
   font-family: var(--font-ui);
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--text-sec);
-  margin-bottom: 36px;
   line-height: 1.7;
 }
 
-.cta-actions {
+.cta-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  text-align: left;
+}
+
+.cta-product-card {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px 28px;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.cta-product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.cta-product-card-top {
+  margin-bottom: 24px;
+}
+
+.cta-product-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  font-size: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.cta-product-title {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.cta-product-desc {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--text-sec);
+  line-height: 1.6;
+}
+
+.cta-action-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.92rem;
+  padding: 12px 18px;
+  gap: 8px;
+}
+
+.cta-action-btn svg {
+  transition: transform var(--dur) var(--ease);
+}
+
+.cta-action-btn:hover svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 860px) {
+  .cta-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .cta-card {
+    padding: 36px 24px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════
