@@ -18,17 +18,39 @@
   <meta name="twitter:site" content="@rao_ventures" />
   <link rel="canonical" href="https://raoventures.co" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=optional" />
+  <!-- Local fonts avoid a blocking Google Fonts stylesheet and extra connections. -->
+  <link rel="preload" href="fonts/eb-garamond-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/eb-garamond-latin-italic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/inter-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: normal;
+      font-weight: 600;
+      font-display: optional;
+      src: url('fonts/eb-garamond-latin-normal.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: italic;
+      font-weight: 600;
+      font-display: optional;
+      src: url('fonts/eb-garamond-latin-italic.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: optional;
+      src: url('fonts/inter-latin-normal.woff2') format('woff2');
+    }
+  </style>
   <link rel="preload" as="image" href="images/r_logo.webp" fetchpriority="high" type="image/webp" />
 
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="images/r_logo.png" />
 
-  <!-- Vexo Web Analytics -->
-  <script src="https://www.vexo.co/analytics.js" defer></script>
+  <!-- Analytics loads after the page is ready; see main.js. -->
 </head>
 
 <body class="home-page">
@@ -299,7 +321,7 @@
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="main.js" defer></script>
 </body>
 
 </html>

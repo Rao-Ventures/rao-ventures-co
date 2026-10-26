@@ -99,17 +99,55 @@ if (heroOrbs.length > 0 && !document.body.classList.contains('home-page')) {
   }, { passive: true });
 }
 
+// Load home-page analytics when the page is ready and the browser is idle.
+// Other pages retain their existing analytics script.
+const pendingOutboundEvents = [];
+let analyticsLoading = false;
+const loadAnalytics = () => {
+  if (analyticsLoading || window.vexo) return;
+  analyticsLoading = true;
+  const script = document.createElement('script');
+  script.src = 'https://www.vexo.co/analytics.js';
+  script.async = true;
+  script.onload = () => {
+    if (typeof window.vexo?.customEvent === 'function') {
+      pendingOutboundEvents.splice(0).forEach(event => {
+        window.vexo.customEvent('outbound_click', event);
+      });
+    }
+  };
+  document.head.append(script);
+};
+
+if (document.body.classList.contains('home-page')) {
+  const scheduleAnalytics = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 2000 });
+    } else {
+      window.setTimeout(loadAnalytics, 0);
+    }
+  };
+  if (document.readyState === 'complete') scheduleAnalytics();
+  else window.addEventListener('load', scheduleAnalytics, { once: true });
+}
+
 // ── Vexo Analytics: Outbound & Product Link Click Tracking ─────────
 document.querySelectorAll('a[href^="http"]').forEach(link => {
   link.addEventListener('click', () => {
     try {
       const url = new URL(link.href);
-      if (url.hostname !== window.location.hostname && window.vexo && typeof window.vexo.customEvent === 'function') {
-        window.vexo.customEvent('outbound_click', {
+      if (url.hostname !== window.location.hostname) {
+        const event = {
           destination: url.hostname,
           target_url: link.href,
           text: (link.textContent || '').trim().slice(0, 50)
-        });
+        };
+        if (typeof window.vexo?.customEvent === 'function') {
+          window.vexo.customEvent('outbound_click', event);
+        } else if (document.body.classList.contains('home-page')) {
+          if (pendingOutboundEvents.length < 20) pendingOutboundEvents.push(event);
+          loadAnalytics();
+        }
       }
     } catch (_) {
       // Fail silently if analytics script is blocked or URL parsing fails

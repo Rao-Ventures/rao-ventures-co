@@ -1816,6 +1816,7 @@ button {
 }
 
 .home-page .hero-badge {
+  color: var(--gold);
   letter-spacing: 0.05em;
 }
 
