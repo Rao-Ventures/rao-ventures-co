@@ -73,26 +73,8 @@ if (navToggle && navMobileMenu) {
   });
 }
 
-// Content is visible by default if scripting or observers are unavailable.
-if ('IntersectionObserver' in window && !reducedMotion.matches) {
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('reveal-pending');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.classList.add('reveal-pending');
-    revealObserver.observe(el);
-    el.addEventListener('focusin', () => el.classList.remove('reveal-pending'));
-  });
-}
-
 // Native fragment navigation preserves URL history and keyboard focus.
-// CSS supplies smooth scrolling and clearance below the fixed navigation.
+// CSS supplies clearance below the fixed navigation.
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', () => {
     const target = document.getElementById(anchor.hash.slice(1));
