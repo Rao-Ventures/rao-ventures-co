@@ -22,80 +22,94 @@ if (navbar) {
 const navToggle = document.getElementById('nav-toggle');
 const navMobileMenu = document.getElementById('nav-mobile-menu');
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 if (navToggle && navMobileMenu) {
-  navToggle.addEventListener('click', () => {
-    const isOpen = navMobileMenu.classList.toggle('open');
+  const mobileViewport = window.matchMedia('(max-width: 768px)');
+  navToggle.setAttribute('aria-controls', navMobileMenu.id);
+
+  const setMenuOpen = (isOpen) => {
+    navMobileMenu.classList.toggle('open', isOpen);
     navToggle.setAttribute('aria-expanded', String(isOpen));
     navMobileMenu.setAttribute('aria-hidden', String(!isOpen));
 
-    // Animate hamburger lines
     const spans = navToggle.querySelectorAll('span');
-    if (isOpen) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-    } else {
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
+    spans[0].style.transform = isOpen ? 'rotate(45deg) translate(5px, 5px)' : '';
+    spans[1].style.opacity = isOpen ? '0' : '';
+    spans[2].style.transform = isOpen ? 'rotate(-45deg) translate(5px, -5px)' : '';
+  };
+
+  navToggle.addEventListener('click', () => {
+    setMenuOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  navbar.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+      setMenuOpen(false);
+      navToggle.focus();
     }
   });
 
-  // Close mobile menu when a link is clicked
+  // Close the disclosure after tabbing out of the navigation.
+  navbar.addEventListener('focusout', (event) => {
+    if (!navbar.contains(event.relatedTarget)) setMenuOpen(false);
+  });
+
   navMobileMenu.querySelectorAll('.nav-mobile-link').forEach(link => {
     link.addEventListener('click', () => {
-      navMobileMenu.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      navMobileMenu.setAttribute('aria-hidden', 'true');
-      const spans = navToggle.querySelectorAll('span');
-      spans[0].style.transform = '';
-      spans[1].style.opacity = '';
-      spans[2].style.transform = '';
+      setMenuOpen(false);
+      navToggle.focus({ preventScroll: true });
     });
+  });
+
+  mobileViewport.addEventListener('change', () => {
+    const focusWasInMenu = navMobileMenu.contains(document.activeElement);
+    const focusWasOnToggle = document.activeElement === navToggle;
+    setMenuOpen(false);
+    if (mobileViewport.matches && focusWasInMenu) navToggle.focus();
+    if (!mobileViewport.matches && (focusWasInMenu || focusWasOnToggle)) {
+      navbar.querySelector('.nav-brand').focus();
+    }
   });
 }
 
-// ── Scroll reveal using IntersectionObserver ──────────────────────
-const revealObserver = new IntersectionObserver(
-  (entries) => {
+// Content is visible by default if scripting or observers are unavailable.
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.remove('reveal-pending');
         revealObserver.unobserve(entry.target);
       }
     });
-  },
-  {
-    threshold: 0.12,
-    rootMargin: '0px 0px -50px 0px'
-  }
-);
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => {
-  revealObserver.observe(el);
-});
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('reveal-pending');
+    revealObserver.observe(el);
+    el.addEventListener('focusin', () => el.classList.remove('reveal-pending'));
+  });
+}
 
-// ── Smooth scroll for anchor links ───────────────────────────────
+// Native fragment navigation preserves URL history and keyboard focus.
+// CSS supplies smooth scrolling and clearance below the fixed navigation.
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const href = anchor.getAttribute('href');
-    if (href === '#') return;
-    const target = document.querySelector(href);
+  anchor.addEventListener('click', () => {
+    const target = document.getElementById(anchor.hash.slice(1));
     if (target) {
-      e.preventDefault();
-      const offset = 80; // navbar height
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
     }
   });
 });
 
-// ── Subtle parallax on hero orbs ─────────────────────────────────
+// Decorative parallax is disabled on the home page and for reduced motion.
 const heroOrbs = document.querySelectorAll('.hero-orb');
-if (heroOrbs.length > 0) {
-  window.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+if (heroOrbs.length > 0 && !document.body.classList.contains('home-page')) {
+  window.addEventListener('mousemove', (event) => {
+    if (reducedMotion.matches) return;
+    const x = (event.clientX / window.innerWidth - 0.5) * 2;
+    const y = (event.clientY / window.innerHeight - 0.5) * 2;
     heroOrbs.forEach((orb, i) => {
       const factor = (i + 1) * 8;
       orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;

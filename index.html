@@ -37,7 +37,8 @@
   <script src="https://www.vexo.co/analytics.js" defer></script>
 </head>
 
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- Navigation -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
@@ -55,9 +56,9 @@
         <li><a href="#contact" class="nav-link">Contact</a></li>
         <li><a href="products.html" class="nav-cta" id="nav-explore-btn">Explore</a></li>
       </ul>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
-        aria-controls="nav-links">
-        <span></span><span></span><span></span>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false"
+        aria-controls="nav-mobile-menu">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
     </div>
     <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
@@ -67,18 +68,20 @@
     </div>
   </nav>
 
+  <main id="main-content" tabindex="-1">
   <!-- Hero Section -->
   <section class="hero" id="hero" aria-labelledby="hero-title">
-    <div class="hero-bg">
+    <div class="hero-bg" aria-hidden="true">
       <div class="hero-orb hero-orb-1"></div>
       <div class="hero-orb hero-orb-2"></div>
       <div class="hero-orb hero-orb-3"></div>
       <div class="hero-grid"></div>
     </div>
     <div class="container hero-content">
-      <div class="hero-badge reveal" aria-label="May all beings everywhere be happy and free">
+      <div class="hero-badge reveal">
         <span class="hero-badge-dot"></span>
-        Om Lokah Samastah Sukhino Bhavantu
+        <span lang="sa-Latn">Om Lokah Samastah Sukhino Bhavantu</span>
+        <span class="sr-only"> — May all beings everywhere be happy and free</span>
       </div>
 
       <h1 id="hero-title" class="hero-title reveal reveal-delay-1">
@@ -98,7 +101,7 @@
               clip-rule="evenodd" />
           </svg>
         </a>
-        <a href="#about" class="btn btn-ghost" id="hero-about-btn">Learn More</a>
+        <a href="#about" class="btn btn-ghost" id="hero-about-btn">Learn About Rao Ventures</a>
       </div>
     </div>
     <div class="hero-scroll-indicator" aria-hidden="true">
@@ -125,14 +128,14 @@
       </div>
       <div class="stat-divider" aria-hidden="true"></div>
       <div class="stat reveal reveal-delay-3">
-        <span class="stat-number">∞</span>
+        <span class="stat-number"><span aria-hidden="true">∞</span><span class="sr-only">Unlimited</span></span>
         <span class="stat-label">Possibilities</span>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section class="about section-pad" id="about" aria-labelledby="about-title">
+  <section class="about section-pad" id="about" tabindex="-1" aria-labelledby="about-title">
     <div class="container">
       <div class="about-grid">
         <div class="about-visual reveal">
@@ -220,7 +223,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section class="contact section-pad" id="contact" aria-labelledby="contact-title">
+  <section class="contact section-pad" id="contact" tabindex="-1" aria-labelledby="contact-title">
     <div class="container">
       <div class="contact-inner reveal">
         <div class="section-label">Get In Touch</div>
@@ -258,6 +261,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
@@ -275,20 +280,20 @@
       <nav class="footer-links" aria-label="Footer navigation">
         <div class="footer-col">
           <h3 class="footer-col-title">Products</h3>
-          <a href="https://svastha.co/" class="footer-link" target="_blank" rel="noopener noreferrer">Svastha</a>
+          <a href="https://svastha.co/" class="footer-link" target="_blank" rel="noopener noreferrer">Svastha<span class="sr-only"> (opens in a new tab)</span></a>
           <a href="https://flowintostillness.com/" class="footer-link" target="_blank" rel="noopener noreferrer">Flow
-            Into Stillness</a>
+            Into Stillness<span class="sr-only"> (opens in a new tab)</span></a>
           <a href="https://ashtangapractice.com/" class="footer-link" target="_blank" rel="noopener noreferrer">My
-            Ashtanga Yoga Practice</a>
+            Ashtanga Yoga Practice<span class="sr-only"> (opens in a new tab)</span></a>
           <a href="products.html" class="footer-link">All Products</a>
         </div>
         <div class="footer-col">
           <h3 class="footer-col-title">Company</h3>
           <a href="#about" class="footer-link">About</a>
           <a href="#contact" class="footer-link">Contact</a>
-          <a href="https://uidev.net" class="footer-link" target="_blank" rel="noopener noreferrer">Tech Blog</a>
+          <a href="https://uidev.net" class="footer-link" target="_blank" rel="noopener noreferrer">Tech Blog<span class="sr-only"> (opens in a new tab)</span></a>
           <a href="https://flowintostillness.com/blog" class="footer-link" target="_blank"
-            rel="noopener noreferrer">Wellness Blog</a>
+            rel="noopener noreferrer">Wellness Blog<span class="sr-only"> (opens in a new tab)</span></a>
         </div>
       </nav>
     </div>

@@ -260,12 +260,19 @@ button {
 
 /* ── Scroll Reveal Animations ───────────────────────────────────── */
 .reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+
+.reveal.reveal-pending {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
 }
 
-.reveal.visible {
+.reveal.visible,
+.reveal:focus-within {
   opacity: 1;
   transform: translateY(0);
 }
@@ -283,7 +290,7 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal.reveal-pending {
     opacity: 1;
     transform: none;
     transition: none;
@@ -1702,5 +1709,98 @@ button {
   .hero-actions .btn {
     width: 100%;
     justify-content: center;
+  }
+}
+/* Accessibility: keyboard navigation, readable contrast, and motion preferences. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1100;
+  padding: 12px 20px;
+  background: var(--text);
+  color: white;
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 3px solid #0F766E;
+  outline-offset: 4px;
+}
+
+.footer a:focus-visible,
+.skip-link:focus-visible {
+  outline-color: #D4A843;
+}
+
+[id], a, button {
+  scroll-margin-top: 88px;
+}
+
+.home-page {
+  --gold: #806010;
+  --text-tert: #746550;
+}
+
+.home-page .footer-tagline,
+.home-page .footer-col-title,
+.home-page .footer-copy,
+.home-page .footer-made {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.home-page .hero-orb,
+.home-page .hero-badge-dot,
+.home-page .scroll-line {
+  animation: none;
+}
+
+.nav-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page .contact-method-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.home-page .hero-badge {
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .home-page .hero-content {
+    padding-inline: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
