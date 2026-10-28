@@ -26,3 +26,10 @@ rao-ventures-co/
 
 📧 support@raoventures.co  
 📞 737-434-0575
+
+## Robot Rescue Island legal documents
+
+- [Privacy Policy](robot-rescue-island-privacy.html)
+- [End User License Agreement (EULA)](robot-rescue-island-eula.html)
+
+These pages reproduce the legal documents from `robot-rescue-island/content/legal-documents.json` (effective October 28, 2026). Keep the page text in sync with that source when the app's policies change.

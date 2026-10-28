@@ -942,6 +942,15 @@ button {
   margin-top: 40px;
 }
 
+.contact-address {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 28px;
+  font-style: normal;
+  line-height: 1.6;
+}
+
 .contact-method {
   display: flex;
   align-items: center;
@@ -981,6 +990,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  text-align: left;
 }
 
 .contact-method-label {
@@ -1837,4 +1847,48 @@ button {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Robot Rescue Island legal documents */
+.robot-legal .legal-content {
+  background: var(--cream);
+  padding: 16px 0 80px;
+}
+.robot-legal .legal-container { max-width: 1040px; }
+.robot-legal .legal-card {
+  background: var(--surface);
+  padding: clamp(24px, 6vw, 64px);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  overflow-wrap: anywhere;
+}
+.robot-legal .legal-card p {
+  color: var(--text-sec);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.robot-legal .legal-card .legal-date {
+  font-size: 0.88rem;
+  color: var(--text-tert);
+  margin-bottom: 24px;
+}
+.robot-legal .legal-card h2 {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  color: var(--text);
+  margin: 32px 0 12px;
+}
+.robot-legal .legal-card a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.robot-legal .legal-related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+  padding-top: 24px;
 }
