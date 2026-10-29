@@ -32,11 +32,11 @@ rao-ventures-co/
 - [Privacy Policy](ashtanga-privacy.html)
 - [End User License Agreement (EULA)](ashtanga-eula.html)
 
-These pages reproduce `ashtanga-yoga-app/docs/PRIVACY_POLICY.md` and `ashtanga-yoga-app/docs/EULA.md` (last updated October 29, 2026). Keep the page text in sync with those app documents when the policies change.
+These pages reproduce `ashtanga-yoga-app/docs/PRIVACY_POLICY.md` and `ashtanga-yoga-app/docs/EULA.md` (Privacy Policy last updated October 30, 2026; EULA last updated October 29, 2026). Keep the page text in sync with those app documents when the policies change.
 
 ## Robot Rescue Island legal documents
 
 - [Privacy Policy](robot-rescue-island-privacy.html)
 - [End User License Agreement (EULA)](robot-rescue-island-eula.html)
 
-These pages reproduce the legal documents from `robot-rescue-island/content/legal-documents.json` (effective October 28, 2026). Keep the page text in sync with that source when the app's policies change.
+These pages reproduce the legal documents from `robot-rescue-island/content/legal-documents.json` (last updated October 29, 2026). Keep the page text in sync with that source when the app's policies change.
