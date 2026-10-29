@@ -27,6 +27,13 @@ rao-ventures-co/
 📧 support@raoventures.co  
 📞 737-434-0575
 
+## My Ashtanga Yoga Practice legal documents
+
+- [Privacy Policy](ashtanga-privacy.html)
+- [End User License Agreement (EULA)](ashtanga-eula.html)
+
+These pages reproduce `ashtanga-yoga-app/docs/PRIVACY_POLICY.md` and `ashtanga-yoga-app/docs/EULA.md` (last updated October 29, 2026). Keep the page text in sync with those app documents when the policies change.
+
 ## Robot Rescue Island legal documents
 
 - [Privacy Policy](robot-rescue-island-privacy.html)
