@@ -38,5 +38,6 @@ These pages reproduce `ashtanga-yoga-app/docs/PRIVACY_POLICY.md` and `ashtanga-y
 
 - [Privacy Policy](robot-rescue-island-privacy.html)
 - [End User License Agreement (EULA)](robot-rescue-island-eula.html)
+- [Support and privacy requests](robot-rescue-island-support.html)
 
-These pages reproduce the legal documents from `robot-rescue-island/content/legal-documents.json` (last updated October 29, 2026). Keep the page text in sync with that source when the app's policies change.
+These pages reproduce the shared legal source in `robot-rescue-island/content/legal-documents.json` (Privacy Policy updated October 30, 2026; EULA updated October 29, 2026). From that app checkout, run `node scripts/sync-legal-website.cjs --website-dir /path/to/rao-ventures-co` to refresh all three pages while preserving this site's branding. The update names Zoho Mail and removes the prior voluntary numeric deletion promises; operational and store-console verification remain separate.
