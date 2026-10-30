@@ -25,7 +25,7 @@ rao-ventures-co/
 ## Contact
 
 📧 support@raoventures.co  
-📞 737-434-0575
+📞 +1 737-434-0575
 
 ## My Ashtanga Yoga Practice legal documents
 
