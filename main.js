@@ -99,59 +99,136 @@ if (heroOrbs.length > 0 && !document.body.classList.contains('home-page')) {
   }, { passive: true });
 }
 
-// Load home-page analytics when the page is ready and the browser is idle.
-// Other pages retain their existing analytics script.
-const pendingOutboundEvents = [];
-let analyticsLoading = false;
-const loadAnalytics = () => {
-  if (analyticsLoading || window.vexo) return;
-  analyticsLoading = true;
-  const script = document.createElement('script');
-  script.src = 'https://www.vexo.co/analytics.js';
-  script.async = true;
-  script.onload = () => {
-    if (typeof window.vexo?.customEvent === 'function') {
-      pendingOutboundEvents.splice(0).forEach(event => {
-        window.vexo.customEvent('outbound_click', event);
-      });
-    }
-  };
-  document.head.append(script);
-};
+// Optional website analytics only runs after an explicit, unexpired choice.
+// App legal and support pages deliberately do not opt into this feature.
+if (document.body.hasAttribute('data-website-analytics')) {
+  const consentKey = 'rao-ventures-cookie-consent-v1';
+  const consentLifetime = 180 * 24 * 60 * 60 * 1000;
+  const banner = document.querySelector('.cookie-banner');
+  const settings = document.querySelector('[data-cookie-settings]');
+  let analyticsLoading = false;
+  let returnFocus = false;
+  const pendingEvents = [];
 
-if (document.body.classList.contains('home-page')) {
-  const scheduleAnalytics = () => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(loadAnalytics, { timeout: 2000 });
-    } else {
-      window.setTimeout(loadAnalytics, 0);
-    }
-  };
-  if (document.readyState === 'complete') scheduleAnalytics();
-  else window.addEventListener('load', scheduleAnalytics, { once: true });
-}
-
-// ── Vexo Analytics: Outbound & Product Link Click Tracking ─────────
-document.querySelectorAll('a[href^="http"]').forEach(link => {
-  link.addEventListener('click', () => {
+  const readConsent = () => {
     try {
-      const url = new URL(link.href);
-      if (url.hostname !== window.location.hostname) {
-        const event = {
-          destination: url.hostname,
-          target_url: link.href,
-          text: (link.textContent || '').trim().slice(0, 50)
-        };
-        if (typeof window.vexo?.customEvent === 'function') {
-          window.vexo.customEvent('outbound_click', event);
-        } else if (document.body.classList.contains('home-page')) {
-          if (pendingOutboundEvents.length < 20) pendingOutboundEvents.push(event);
-          loadAnalytics();
-        }
+      const saved = JSON.parse(localStorage.getItem(consentKey));
+      if (saved && ['accepted', 'rejected'].includes(saved.choice) &&
+          Number.isFinite(saved.savedAt) && saved.savedAt <= Date.now() &&
+          Date.now() - saved.savedAt < consentLifetime) return saved.choice;
+    } catch (_) {
+      // Storage may be unavailable; keep tracking off until a choice is made.
+    }
+    return null;
+  };
+
+  let consent = readConsent();
+  const hasConsent = () => consent === 'accepted';
+  const sendEvent = (name, properties) => {
+    if (!hasConsent()) return;
+    try {
+      if (typeof window.vexo?.customEvent === 'function') {
+        window.vexo.customEvent(name, properties);
+      } else if (pendingEvents.length < 20) {
+        // Retain consented clicks while the SDK downloads; never queue before consent.
+        pendingEvents.push({ name, properties });
       }
     } catch (_) {
-      // Fail silently if analytics script is blocked or URL parsing fails
+      // A blocked or failing analytics provider must never interfere with navigation.
+    }
+  };
+
+  const loadAnalytics = () => {
+    if (!hasConsent() || analyticsLoading) return;
+    analyticsLoading = true;
+    const script = document.createElement('script');
+    script.src = 'https://www.vexo.co/analytics.js';
+    script.async = true;
+    script.onload = () => {
+      const queued = pendingEvents.splice(0);
+      if (hasConsent()) queued.forEach(event => sendEvent(event.name, event.properties));
+    };
+    script.onerror = () => {
+      pendingEvents.length = 0;
+      analyticsLoading = false;
+    };
+    document.head.append(script);
+  };
+
+  banner.hidden = consent !== null;
+  settings.hidden = false;
+  settings.addEventListener('click', () => {
+    banner.hidden = false;
+    returnFocus = true;
+    banner.querySelector('button').focus({ preventScroll: true });
+  });
+
+  banner.querySelectorAll('[data-cookie-choice]').forEach(button => {
+    button.addEventListener('click', () => {
+      const wasAccepted = hasConsent();
+      consent = button.dataset.cookieChoice;
+      if (!hasConsent()) pendingEvents.length = 0;
+      try {
+        localStorage.setItem(consentKey, JSON.stringify({ choice: consent, savedAt: Date.now() }));
+      } catch (_) {
+        // The choice still applies to this page when persistence is blocked.
+      }
+      banner.hidden = true;
+      // Move focus out of the now-hidden controls without scrolling the page.
+      if (returnFocus) settings.focus({ preventScroll: true });
+      else {
+        document.querySelector('main')?.setAttribute('tabindex', '-1');
+        document.querySelector('main')?.focus({ preventScroll: true });
+      }
+      if (wasAccepted && !hasConsent()) {
+        // Reload to stop the already-running third-party SDK, including its listeners.
+        window.location.reload();
+      } else loadAnalytics();
+    });
+  });
+
+  // Apply choices changed in another tab, stopping an active SDK on withdrawal.
+  window.addEventListener('storage', event => {
+    if (event.key !== consentKey && event.key !== null) return;
+    const wasAccepted = hasConsent();
+    consent = readConsent();
+    if (wasAccepted && !hasConsent()) window.location.reload();
+    else {
+      banner.hidden = consent !== null;
+      loadAnalytics();
     }
   });
-});
 
+  loadAnalytics();
+
+  // Vexo's SDK supplies anonymous visitor/session identity and unique-user counts.
+  // Stable CTA IDs distinguish buttons with the same label or destination.
+  document.querySelectorAll('[data-cta], a[href^="http"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (!hasConsent()) return;
+      try {
+        const url = new URL(link.href);
+        const properties = {
+          page_path: window.location.pathname,
+          destination: url.hostname,
+          // Exclude query strings, which may contain personal or campaign data.
+          target_url: `${url.origin === 'null' ? url.protocol : url.origin}${url.pathname}${url.hash}`,
+          text: (link.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 100)
+        };
+        if (link.dataset.cta) {
+          sendEvent('cta_click', {
+            ...properties,
+            cta_id: link.dataset.cta,
+            section: link.closest('section[id], nav, footer')?.id ||
+              link.closest('nav, footer')?.tagName.toLowerCase() || 'page'
+          });
+        }
+        if (['http:', 'https:'].includes(url.protocol) && url.hostname !== window.location.hostname) {
+          sendEvent('outbound_click', properties);
+        }
+      } catch (_) {
+        // Analytics must never interfere with navigation.
+      }
+    });
+  });
+}

@@ -53,7 +53,7 @@
   <!-- Analytics loads after the page is ready; see main.js. -->
 </head>
 
-<body class="home-page">
+<body class="home-page" data-website-analytics>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- Navigation -->
@@ -70,7 +70,7 @@
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="products.html" class="nav-link">Products</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
-        <li><a href="products.html" class="nav-cta" id="nav-explore-btn">Explore</a></li>
+        <li><a href="products.html" class="nav-cta" id="nav-explore-btn" data-cta="nav-explore-btn">Explore</a></li>
       </ul>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false"
         aria-controls="nav-mobile-menu">
@@ -109,7 +109,7 @@
         ancient wisdom with modern technology.
       </p>
       <div class="hero-actions">
-        <a href="products.html" class="btn btn-primary" id="hero-explore-btn">
+        <a href="products.html" class="btn btn-primary" id="hero-explore-btn" data-cta="hero-explore-btn">
           <span>Explore Our Products</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd"
@@ -117,7 +117,7 @@
               clip-rule="evenodd" />
           </svg>
         </a>
-        <a href="#about" class="btn btn-ghost" id="hero-about-btn">Learn About Rao Ventures</a>
+        <a href="#about" class="btn btn-ghost" id="hero-about-btn" data-cta="hero-about-btn">Learn About Rao Ventures</a>
       </div>
     </div>
     <div class="hero-scroll-indicator" aria-hidden="true">
@@ -188,7 +188,7 @@
             Through our flagship offerings, we help individuals unlock their potential, cultivate inner stillness, and
             achieve sustainable well-being—combining evidence-based practices with a deep commitment to giving back.
           </p>
-          <a href="products.html" class="btn btn-primary" id="about-products-btn">
+          <a href="products.html" class="btn btn-primary" id="about-products-btn" data-cta="about-products-btn">
             <span>View Our Products</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd"
@@ -246,7 +246,7 @@
         <h2 id="contact-title" class="section-title">Let's <em>Connect</em></h2>
         <p class="section-subtitle">Have questions about our products or want to learn more about Rao Ventures?</p>
         <div class="contact-methods">
-          <a href="mailto:support@raoventures.co" class="contact-method" id="contact-email">
+          <a href="mailto:support@raoventures.co" class="contact-method" id="contact-email" data-cta="contact-email">
             <div class="contact-method-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
@@ -259,7 +259,7 @@
               <span class="contact-method-value">support@raoventures.co</span>
             </div>
           </a>
-          <a href="tel:+17374340575" class="contact-method" id="contact-phone">
+          <a href="tel:+17374340575" class="contact-method" id="contact-phone" data-cta="contact-phone">
             <div class="contact-method-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path fill-rule="evenodd"
@@ -320,10 +320,24 @@
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p class="footer-copy">© 2026 Rao Ventures LLC. All rights reserved.</p>
+        <button class="cookie-settings" type="button" data-cookie-settings hidden>Cookie settings</button>
         <p class="footer-made">Built with ❤️ for wellness</p>
       </div>
     </div>
   </footer>
+
+  <section class="cookie-banner" aria-labelledby="cookie-title" aria-describedby="cookie-description" hidden>
+    <div class="cookie-banner-copy">
+      <h2 id="cookie-title">Help us make your experience better</h2>
+      <p id="cookie-description">With your permission, we use analytics to understand unique website visits and calls to action, including product and contact clicks.
+        Optional tracking stays off until you accept. We store your choice in this browser for 180 days.
+        You can change it anytime in Cookie settings.</p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="cookie-choice" type="button" data-cookie-choice="rejected">Reject analytics</button>
+      <button class="cookie-choice" type="button" data-cookie-choice="accepted">Accept analytics</button>
+    </div>
+  </section>
 
   <script src="main.js" defer></script>
 </body>

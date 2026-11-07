@@ -32,11 +32,9 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="images/r_logo.png" />
 
-  <!-- Vexo Web Analytics -->
-  <script src="https://www.vexo.co/analytics.js" defer></script>
 </head>
 
-<body>
+<body data-website-analytics>
 
   <!-- Navigation -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
@@ -52,7 +50,7 @@
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="products.html" class="nav-link nav-link-active">Products</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-        <li><a href="index.html#contact" class="nav-cta" id="nav-contact-btn">Contact Us</a></li>
+        <li><a href="index.html#contact" class="nav-cta" id="nav-contact-btn" data-cta="nav-contact-btn">Contact Us</a></li>
       </ul>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
         aria-controls="nav-links">
@@ -182,7 +180,7 @@
 
             <div class="product-detail-cta reveal reveal-delay-3"
               style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-              <a href="https://ashtangapractice.com/" class="btn btn-primary" id="ashtanga-visit-btn" target="_blank"
+              <a href="https://ashtangapractice.com/" class="btn btn-primary" id="ashtanga-visit-btn" data-cta="ashtanga-visit-btn" target="_blank"
                 rel="noopener noreferrer">
                 <span>Visit Website</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -272,7 +270,7 @@
             </div>
 
             <div class="product-detail-cta reveal reveal-delay-3">
-              <a href="https://svastha.co/" class="btn btn-primary" id="svastha-visit-btn" target="_blank"
+              <a href="https://svastha.co/" class="btn btn-primary" id="svastha-visit-btn" data-cta="svastha-visit-btn" target="_blank"
                 rel="noopener noreferrer">
                 <span>Visit Website</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -355,7 +353,7 @@
             </div>
 
             <div class="product-detail-cta reveal reveal-delay-3">
-              <a href="https://flowintostillness.com/" class="btn btn-primary" id="flow-visit-btn" target="_blank"
+              <a href="https://flowintostillness.com/" class="btn btn-primary" id="flow-visit-btn" data-cta="flow-visit-btn" target="_blank"
                 rel="noopener noreferrer">
                 <span>Visit Website</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -408,7 +406,7 @@
               We’re looking for beta testers! Parents and guardians, help us shape Robot Rescue Island before launch. Email us if you’re interested.
             </p>
             <div class="product-detail-cta reveal reveal-delay-3">
-              <a href="mailto:support@raoventures.co?subject=Robot%20Rescue%20Island%20Beta%20Testing" class="btn btn-primary" id="robot-beta-email-btn">
+              <a href="mailto:support@raoventures.co?subject=Robot%20Rescue%20Island%20Beta%20Testing" class="btn btn-primary" id="robot-beta-email-btn" data-cta="robot-beta-email-btn">
                 <span>Email Us to Join the Beta</span>
               </a>
             </div>
@@ -425,7 +423,7 @@
   </main>
 
   <!-- CTA Banner -->
-  <section class="cta-banner" aria-labelledby="cta-title">
+  <section id="wellness-cta" class="cta-banner" aria-labelledby="cta-title">
     <div class="cta-bg" aria-hidden="true">
       <div class="cta-orb-1"></div>
       <div class="cta-orb-2"></div>
@@ -448,7 +446,7 @@
               <p class="cta-product-desc">Master the traditional Primary Series with authentic Sanskrit audio guidance,
                 customizable breath pacing, and classical chants.</p>
             </div>
-            <a href="https://ashtangapractice.com/" class="btn btn-primary cta-action-btn" id="cta-ashtanga-btn"
+            <a href="https://ashtangapractice.com/" class="btn btn-primary cta-action-btn" id="cta-ashtanga-btn" data-cta="cta-ashtanga-btn"
               target="_blank" rel="noopener noreferrer">
               <span>Try Ashtanga Yoga</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -467,7 +465,7 @@
               <p class="cta-product-desc">Explore sacred Hindu scriptures verse-by-verse with AI-powered spiritual
                 guidance, journaling, and reading progress.</p>
             </div>
-            <a href="https://svastha.co/" class="btn btn-primary cta-action-btn" id="cta-svastha-btn" target="_blank"
+            <a href="https://svastha.co/" class="btn btn-primary cta-action-btn" id="cta-svastha-btn" data-cta="cta-svastha-btn" target="_blank"
               rel="noopener noreferrer">
               <span>Try Svastha</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -486,7 +484,7 @@
               <p class="cta-product-desc">Access 70+ detailed yoga posture instructions with contraindications,
                 modifications, and mindful living insights.</p>
             </div>
-            <a href="https://flowintostillness.com/" class="btn btn-primary cta-action-btn" id="cta-flow-btn"
+            <a href="https://flowintostillness.com/" class="btn btn-primary cta-action-btn" id="cta-flow-btn" data-cta="cta-flow-btn"
               target="_blank" rel="noopener noreferrer">
               <span>Try Flow Into Stillness</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -535,10 +533,24 @@
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
         <p class="footer-copy">© 2026 Rao Ventures LLC. All rights reserved.</p>
+        <button class="cookie-settings" type="button" data-cookie-settings hidden>Cookie settings</button>
         <p class="footer-made">Built with ❤️ for wellness</p>
       </div>
     </div>
   </footer>
+
+  <section class="cookie-banner" aria-labelledby="cookie-title" aria-describedby="cookie-description" hidden>
+    <div class="cookie-banner-copy">
+      <h2 id="cookie-title">Help us make your experience better</h2>
+      <p id="cookie-description">With your permission, we use analytics to understand unique website visits and calls to action, including product and contact clicks.
+        Optional tracking stays off until you accept. We store your choice in this browser for 180 days.
+        You can change it anytime in Cookie settings.</p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="cookie-choice" type="button" data-cookie-choice="rejected">Reject analytics</button>
+      <button class="cookie-choice" type="button" data-cookie-choice="accepted">Accept analytics</button>
+    </div>
+  </section>
 
   <script src="main.js"></script>
 </body>
