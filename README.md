@@ -19,8 +19,35 @@ rao-ventures-co/
 ├── styles.css      # Design system & styles
 ├── main.js         # Interactive behaviors
 ├── CNAME           # Custom domain
+├── robots.txt      # Crawler access and sitemap discovery
+├── sitemap.xml     # Canonical public page URLs
 └── README.md
 ```
+
+## Search metadata
+
+Keep `sitemap.xml` aligned with the canonical URLs of indexable public pages when
+adding or removing pages. Use `https://raoventures.co/` for the homepage and link to `/`
+rather than `index.html`. `robots.txt` advertises the sitemap to crawlers.
+
+Each public page has a unique title, description, canonical URL, and social
+preview metadata. The homepage includes Organization and WebSite JSON-LD; the
+products page includes CollectionPage, BreadcrumbList, and ItemList JSON-LD.
+Update the product list when released offerings change. Social previews use
+the existing square logo with a summary card.
+
+Robot Rescue Island is in beta and excluded from the sitemap, product structured
+data, and marketing metadata. Its legal and support pages use `noindex`; the beta
+section on the products page uses `data-nosnippet`. Keep these exclusions until
+launch. Allow crawlers to access these pages so they can read `noindex`.
+
+When replacing generated Ashtanga legal pages, preserve their SEO metadata and
+page-level heading, or add these to the upstream generator before copying new
+output. Keep the legal wording synchronized with the app sources.
+
+After deployment, submit `https://raoventures.co/sitemap.xml` in Google Search
+Console and check indexing and structured data there. Local checks cannot verify
+Google's selected canonical URLs or search appearance.
 
 ## Contact
 
