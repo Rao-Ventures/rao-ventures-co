@@ -1075,6 +1075,34 @@ button {
   color: var(--gold-light);
 }
 
+.footer-socials {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  color: rgba(255, 255, 255, 0.7);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.footer-social:hover,
+.footer-social:focus-visible {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.footer-social:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
